@@ -18,5 +18,7 @@ export default {
     jwtSecret: process.env.APP_JWT_SECRET,
     jwtAlgorithm: process.env.APP_JWT_ALGO,
   },
-  logging: {},
+  logging: {
+    level: process.env.APP_LOG_LEVEL || "silly",
+  },
 };

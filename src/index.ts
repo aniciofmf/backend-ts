@@ -2,6 +2,7 @@ import http from "node:http";
 import cluster from "node:cluster";
 import os from "node:os";
 import config from "@/config";
+import Logger from "./logger";
 
 const port = parseInt(config.port) || parseInt("3000");
 const hostname = config.endpoint || "localhost";
@@ -16,7 +17,7 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
   cluster.on("exit", (worker) => {
-    console.log(`Worker ${worker.process.pid} just died`);
+    Logger.info(`Worker ${worker.process.pid} just died`);
     cluster.fork();
   });
 } else {
@@ -24,7 +25,7 @@ if (cluster.isPrimary) {
     const addr = server.address();
     const bind =
       typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
-    console.log(`Listening on ${bind}`);
+    Logger.info(`Listening on ${bind}`);
   });
 }
 
@@ -37,13 +38,13 @@ server.on("error", (error) => {
 
   switch (error.code) {
     case "EACCES":
-      console.log(`${bind} requires elevated privileges`);
+      Logger.error(`${bind} requires elevated privileges`);
       process.exit(1);
     case "EADDRINUSE":
-      console.log(`${bind} is already in use`);
+      Logger.error(`${bind} is already in use`);
       process.exit(1);
     default:
-      console.log(error);
+      Logger.error(error);
       process.exit(1);
   }
 });
