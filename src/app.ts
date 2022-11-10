@@ -21,5 +21,5 @@ module.exports = async () => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(errors());
 
-  await loadMoongose();
+  const dbConnection = await loadMoongose();
 };
