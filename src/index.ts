@@ -1,0 +1,49 @@
+import http from "node:http";
+import cluster from "node:cluster";
+import os from "node:os";
+import config from "@/config";
+
+const port = parseInt(config.port) || parseInt("3000");
+const hostname = config.endpoint || "localhost";
+
+const app = require("./app")();
+const numCPUs = os.cpus().length / 4;
+const server = http.createServer(app);
+
+if (cluster.isPrimary) {
+  console.log(`Master ${process.pid} is running`);
+  for (let i = 0; i < numCPUs; i += 1) {
+    cluster.fork();
+  }
+  cluster.on("exit", (worker) => {
+    console.log(`Worker ${worker.process.pid} just died`);
+    cluster.fork();
+  });
+} else {
+  server.listen(port, hostname, () => {
+    const addr = server.address();
+    const bind =
+      typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+    console.log(`Listening on ${bind}`);
+  });
+}
+
+server.on("error", (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  const bind = typeof port === "string" ? `Pipe ${port}` : `Port ${port}`;
+
+  switch (error.code) {
+    case "EACCES":
+      console.log(`${bind} requires elevated privileges`);
+      process.exit(1);
+    case "EADDRINUSE":
+      console.log(`${bind} is already in use`);
+      process.exit(1);
+    default:
+      console.log(error);
+      process.exit(1);
+  }
+});
