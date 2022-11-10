@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2020",
     "lib": ["es2020"],
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": ["./node_modules/@types", "./src/types", "/tests"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -20,6 +20,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "tests"]
+  "include": ["./src/**/*", "/src/tests/*", "./tests"],
+  "exclude": ["node_modules", "src/tests"]
 }
