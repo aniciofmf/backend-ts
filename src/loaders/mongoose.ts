@@ -6,9 +6,7 @@ const loadMoongose = async (): Promise<DB> => {
   try {
     const mongooseHandler = await mongoose.connect(config.mongodb);
     return mongooseHandler.connection.db;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export { loadMoongose };
