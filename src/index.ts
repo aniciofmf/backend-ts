@@ -11,22 +11,30 @@ const app = require("./app")();
 const numCPUs = os.cpus().length / 4;
 const server = http.createServer(app);
 
-if (cluster.isPrimary) {
-  console.log(`Master ${process.pid} is running`);
-  for (let i = 0; i < numCPUs; i += 1) {
-    cluster.fork();
-  }
-  cluster.on("exit", (worker) => {
-    Logger.info(`Worker ${worker.process.pid} just died`);
-    cluster.fork();
-  });
-} else {
+function runServer() {
   server.listen(port, hostname, () => {
     const addr = server.address();
     const bind =
       typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
     Logger.info(`Listening on ${bind}`);
   });
+}
+
+if (process.env.NODE_ENV !== "development") {
+  if (cluster.isPrimary) {
+    console.log(`Master ${process.pid} is running`);
+    for (let i = 0; i < numCPUs; i += 1) {
+      cluster.fork();
+    }
+    cluster.on("exit", (worker) => {
+      Logger.info(`Worker ${worker.process.pid} just died`);
+      cluster.fork();
+    });
+  } else {
+    runServer();
+  }
+} else {
+  runServer();
 }
 
 server.on("error", (error) => {
