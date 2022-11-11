@@ -7,6 +7,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { errors } from "celebrate";
 import { loadMoongose } from "@/loaders";
+import route from "@/api";
 
 module.exports = async () => {
   const app = express();
@@ -20,6 +21,7 @@ module.exports = async () => {
   app.use(express.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(errors());
+  app.use("api/v1", route());
 
   const dbConnection = await loadMoongose();
 };
