@@ -6,8 +6,10 @@ import compression from "compression";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { errors } from "celebrate";
+
 import { loadMoongose } from "@/loaders";
 import route from "@/api";
+import config from "@/config";
 
 module.exports = async () => {
   const app = express();
@@ -21,7 +23,7 @@ module.exports = async () => {
   app.use(express.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(errors());
-  app.use("api/v1", route());
+  app.use(config.endpoint_prefix, route());
 
   const dbConnection = await loadMoongose();
 };

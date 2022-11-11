@@ -11,15 +11,6 @@ const app = require("./app")();
 const numCPUs = os.cpus().length / 4;
 const server = http.createServer(app);
 
-function runServer() {
-  server.listen(port, hostname, () => {
-    const addr = server.address();
-    const bind =
-      typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
-    Logger.info(`Listening on ${bind}`);
-  });
-}
-
 if (process.env.NODE_ENV !== "development") {
   if (cluster.isPrimary) {
     console.log(`Master ${process.pid} is running`);
@@ -37,7 +28,7 @@ if (process.env.NODE_ENV !== "development") {
   runServer();
 }
 
-server.on("error", (error) => {
+server.on("error", (error: NodeJS.ErrnoException) => {
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -56,3 +47,12 @@ server.on("error", (error) => {
       process.exit(1);
   }
 });
+
+function runServer() {
+  server.listen(port, hostname, () => {
+    const addr = server.address();
+    const bind =
+      typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+    Logger.info(`Listening on ${bind}`);
+  });
+}
