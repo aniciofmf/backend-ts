@@ -1,4 +1,14 @@
-import { loadMoongose } from "./mongoose";
-import "@/subscribers/user";
+import { Container } from "typedi";
+import { loadMoongose } from "@/db/mongoose";
 
-export { loadMoongose };
+import "@/events/subscribers/user";
+
+const db = async () => {
+  const dbConnection = await loadMoongose();
+
+  Container.set("db", dbConnection);
+};
+
+const models = async () => {};
+
+export { db };

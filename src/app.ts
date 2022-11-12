@@ -7,7 +7,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { errors } from "celebrate";
 
-import { loadMoongose } from "@/loaders";
+import * as Loader from "@/loaders";
 import route from "@/api";
 import config from "@/config";
 
@@ -25,5 +25,5 @@ module.exports = async () => {
   app.use(errors());
   app.use(config.endpoint_prefix, route());
 
-  const dbConnection = await loadMoongose();
+  await Loader.db();
 };
