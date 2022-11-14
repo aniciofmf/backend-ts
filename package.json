@@ -2,7 +2,7 @@
   "name": "be-nodejs2",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "start:dev": "cross-env NODE_ENV=development nodemon",

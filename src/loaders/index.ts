@@ -1,6 +1,9 @@
 import { Container } from "typedi";
 import { loadMoongose } from "@/db/mongoose";
 import Logger from "@/logger";
+import ConfigService from "@/services/config";
+
+const c = new ConfigService();
 
 import "@/events/subscribers/user";
 
@@ -11,7 +14,5 @@ const db = async () => {
 
   Container.set("db", dbConnection);
 };
-
-const models = async () => {};
 
 export { db };
