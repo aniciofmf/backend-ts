@@ -4,6 +4,9 @@ export interface IUser {
   email: string;
   password: string;
   salt: string;
+  token: string;
+  lastLogin: Date;
+  active: boolean;
 }
 
 export interface IUserInputDTO {

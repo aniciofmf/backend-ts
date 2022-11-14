@@ -3,12 +3,14 @@ import { Service } from "typedi";
 
 @Service("ConfigService")
 class ConfigService {
-  constructor(private configPath: string = "") {
+  configPath: { default: string };
+
+  load(): void {
     this.configPath = require(path.join("..", "config", "index.ts")) || {};
   }
 
   get(key: string): string {
-    return this.configPath[key];
+    return this.configPath.default[key];
   }
 }
 
