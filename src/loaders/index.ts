@@ -4,7 +4,7 @@ import { loadMoongose } from "@/db/mongoose";
 
 import Logger from "@/logger";
 import ConfigService from "@/services/config";
-import KeyService from "@/services/key";
+import KeyService from "@/services/key/key";
 
 import "@/events/subscribers/user";
 

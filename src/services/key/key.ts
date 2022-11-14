@@ -1,5 +1,6 @@
 import { Service, Inject } from "typedi";
 import ConfigService from "@/services/config";
+import { IKey } from "../../interfaces/IKey";
 
 @Service()
 class KeyService {
@@ -8,11 +9,7 @@ class KeyService {
     this.configService.load();
   }
 
-  public generateToken() {}
-
-  public signToken() {}
-
-  public validateToken() {}
+  setKeyType(KeyType: IKey) {}
 }
 
 export default KeyService;
