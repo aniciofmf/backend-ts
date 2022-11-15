@@ -1,8 +1,8 @@
 import { Router } from "express";
 import userRoute from "@/api/routes/user";
 
-const route = () => {
-  return Router;
+export default () => {
+  const app = Router();
+  userRoute(app);
+  return app;
 };
-
-export default route;

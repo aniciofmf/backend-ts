@@ -1,28 +1,25 @@
 import { Router } from "express";
 
-const router = Router();
+const route = Router();
+export default (app: Router) => {
+  app.use("/user", route);
 
-const userRoute = () => {
-  router.use("/user");
-
-  router.post("/signup", [
+  route.post("/signup", [
     /*middlewares*/
   ]);
-  router.post("/login", [
+  route.post("/login", [
     /*middlewares*/
   ]);
-  router.post("/logout", [
-    /*middlewares*/
-  ]);
-
-  router.get("/me", [
-    /*middlewares*/
-  ]);
-  router.use("/reset", [
+  route.post("/logout", [
     /*middlewares*/
   ]);
 
-  return router;
+  route.get("/me", [
+    /*middlewares*/
+  ]);
+  route.post("/reset", [
+    /*middlewares*/
+  ]);
+
+  return route;
 };
-
-export default userRoute;

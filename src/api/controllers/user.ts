@@ -19,3 +19,8 @@ const me = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
+
+const reset = async (req: Request, res: Response) => {
+  try {
+  } catch (error) {}
+};
