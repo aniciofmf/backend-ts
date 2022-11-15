@@ -1,26 +1,26 @@
 import { Request, Response } from "express";
 
-const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
 
-const signup = async (req: Request, res: Response) => {
+export const signup = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
 
-const logout = async (req: Request, res: Response) => {
+export const logout = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
 
-const me = async (req: Request, res: Response) => {
+export const me = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
 
-const reset = async (req: Request, res: Response) => {
+export const reset = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
