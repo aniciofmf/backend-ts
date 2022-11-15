@@ -1,9 +1,11 @@
 import { IKey } from "@/interfaces/IKey";
 
 class HSKey implements IKey {
-  generateToken: () => void;
-  signToken: () => void;
-  validateToken: () => void;
+  constructor(private keyAlgo: string) {}
+
+  generateToken(): string {
+    return "";
+  }
 }
 
 export default HSKey;
