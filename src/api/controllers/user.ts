@@ -1,4 +1,8 @@
 import { Request, Response } from "express";
+import { Container } from "typedi";
+import KeyService from "@/services/key/key";
+
+const keyService = Container.get(KeyService);
 
 export const login = async (req: Request, res: Response) => {
   try {
