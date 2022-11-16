@@ -8,10 +8,11 @@ import KeyService from "@/services/key/key";
 
 import "@/events/subscribers/user";
 
+const keyService = new KeyService(new ConfigService());
 /* Filling the Container */
 Container.set("Logger", Logger);
 Container.set("ConfigService", ConfigService);
-Container.set("KeyService", KeyService);
+Container.set("KeyService", keyService);
 
 const db = async () => {
   const dbConnection = await loadMoongose();

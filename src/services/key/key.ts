@@ -3,8 +3,7 @@ import ConfigService from "@/services/config";
 
 @Service()
 class KeyService {
-  constructor(@Inject("ConfigService") private configService: ConfigService) {
-    this.configService = new ConfigService();
+  constructor(private configService: ConfigService) {
     this.configService.load();
   }
 
