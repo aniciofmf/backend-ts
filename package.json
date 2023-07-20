@@ -31,7 +31,7 @@
     "mongoose": "^7.4.0",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.1",
     "typedi": "^0.10.0",
     "winston": "^3.8.2"
   },
